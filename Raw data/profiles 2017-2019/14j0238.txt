@@ -1,0 +1,91 @@
+----------------------------------------------------------------------------------------
+               Software Installation for bus 14j0238 using Download Script
+----------------------------------------------------------------------------------------
+Start Time 09:41:22  09/19/2018
+
+  Mileage: 0.0000
+
+  Saving Serial Numbers...
+
+  ----------------------
+  Get the release choice
+  ----------------------
+
+  The release selection is DR5.3.10.3
+
+  Download selection..
+
+  You have selected to download the EBMS build only.
+
+  -------------------------------------------------------
+  Determine the version and checksum of the EBMS1 target
+  -------------------------------------------------------
+
+                             Actual    Expected
+  BMS OP (Prime) Version:    0x0206BA42    0x0206BA42
+  BMS OP (Prime) Checksum:   0x03EC9675    0x03EC9675
+  BMS BL (Boot) Version:     0x0206BB42    0x0206BB42
+  BMS BL (Boot) Checksum:    0xDF1C5EF9    0xDF1C5EF9
+
+  EBMS OP
+    DR5.3.10.3 software is already installed on the EBMS1 OP (Prime).
+    EBMS1 OP (Prime) software install will be skipped...
+
+  EBMS BL
+    DR5.3.10.3 software is already installed on the EBMS1 BL (Boot).
+    EBMS1 BL (Boot) software install will be skipped...
+
+  -------------------------------------------------------
+  Determine the version and checksum of the EMOD target
+  -------------------------------------------------------
+
+                                    Actual    Expected
+  Module OP (Prime) Version:       0x0104CA42    0x0104CA42
+  Module OP (Prime) Checksum:      0x7A2CD716    0x7A2CD716
+  Module BL (Boot) Version:        0x0104CB42    0x0104CB42
+  Module BL (Boot) Checksum:       0xC6B5EEBD    0xC6B5EEBD
+
+  EMOD OP
+    DR5.3.10.3 software is already installed on the EMOD OP (Prime).
+    EMOD OP (Prime) software install will be skipped...
+
+  EMOD BL
+    DR5.3.10.3 software is already installed on the EMOD BL (Boot).
+    EMOD BL (Boot) software install will be skipped...
+
+  Starting BMS and Module OP (Prime)...
+
+  --------------------------
+  Installing BMS Adjustments
+  --------------------------
+
+  Initializing...
+
+  The adjustment selection is DR5.3.10.3_BMS_No_CWK_No_CPC.adf
+
+
+  Installing BMS Adjustments... DR5.3.10.3_BMS_No_CWK_No_CPC.adf
+
+  ---------------------------------------
+  Save the new system adjustments to file
+  ---------------------------------------
+
+  Saving adjustments to file C:\BAE Systems\IDS\Orion VPMS\Data\14j0238_NEW_EBMS_Adjustments_20180919_094122.adf
+
+  ---------------------------------------
+  Save the new system adjustments to file
+  ---------------------------------------
+
+  Saving adjustments...
+
+  Saved adjustments to file C:\BAE Systems\IDS\Orion VPMS\Data\14j0238_NEW_Adjustments_20180919_094122.adf
+
+------------------------------------------------
+-      Software download IS Successful!        -
+-                                              -
+-    Adjustments installation IS Successful!   -
+------------------------------------------------
+
+End of Script.
+
+Finish Time 9:43:24  09/19/2018
