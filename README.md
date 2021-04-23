@@ -28,3 +28,26 @@
 ![Gantt Chart](https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/gantt_chart.jpg)
 
 
+## Repository Architecture:
+
+```
+|   README.md
+|   LICENSE
+|   .gitignore
++---doc
+|   |   Use_Cases.md
+|   |   Hybrid_Bus_Batteries.pdf
+|   |   gantt_chart.jpg
+|   |   kcm-diagnostics-final.pdf
+|   |   sequence_diagram.jpg
++---Raw Data 
+|   |   old profiles 2015-2017-05-26
+|   |   old profiles 2015-2017-aug-13th
+|   |   profiles 2017-2019
++---Organization
+|   |   Florence scrap work.ipynb
+|   |   KCM_BMS.ipynb
+
+```
+
+
