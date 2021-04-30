@@ -67,6 +67,7 @@ def group_files(directory, keyword):
     count = 1
     list_of_csv = grab_csv(directory)
     moved_files = []
+    serial_start = 17
     for filename in list_of_csv:
         list_matches = []
         if filename in moved_files:
@@ -80,7 +81,7 @@ def group_files(directory, keyword):
                 for row in reader:
                     for element in row:
                         if keyword in element:
-                            mod_num = re.sub(r'\W+', '', element[17:]).lower()
+                            mod_num = re.sub(r'\W+', '', element[serial_start:]).lower()
                             if mod_num != '':
                                 module_list.append(mod_num)
                             else:
@@ -108,7 +109,7 @@ def group_files(directory, keyword):
                             for row in reader:
                                 for element in row:
                                     if keyword in element:
-                                        mod_num = re.sub(r'\W+', '', element[17:]).lower()
+                                        mod_num = re.sub(r'\W+', '', element[serial_start:]).lower()
                                         if mod_num != '':
                                             other_modules.append(mod_num)
                                         else:
