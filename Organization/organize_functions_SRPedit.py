@@ -149,8 +149,8 @@ group_files(directory, 'Mfg Data (ASCII)')
 keyword = 'Mfg Data (ASCII)'
 directory = find_directory()
 test_csv = grab_csv(directory)
-file_1 = directory + '/Raw data/' + '!3J0018_ProfileData_20170920082828.csv'
-file_2 = directory + '/Raw data/' + '14H0220_ProfileData_20181218082248.csv'
+file_1 = directory + 'Raw data/' + '!3J0018_ProfileData_20170920082828.csv'
+file_2 = directory + 'Raw data/' + '14H0220_ProfileData_20181218082248.csv'
 file_1_mods = []
 file_2_mods = []
 list_matches = []
