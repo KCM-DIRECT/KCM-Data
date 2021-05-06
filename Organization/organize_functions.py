@@ -75,7 +75,6 @@ def group_files(directory, keyword):
         else:
             module_list = []
             source = os.path.join(directory, filename)
-            print('Source file: ', source)
             with open(directory + filename) as file_1:
                 reader = csv.reader(file_1)
                 for row in reader:
@@ -102,7 +101,6 @@ def group_files(directory, keyword):
                     if otherfile in moved_files:
                         pass
                     else:
-                        print('Other file', otherfile)
                         other_modules = []
                         with open(directory + otherfile) as file_2:
                             reader = csv.reader(file_2)
@@ -122,7 +120,6 @@ def group_files(directory, keyword):
                 for match in list_matches:  # Modified from before because generally not safe to modify list as we loop
                     source = directory + match
                     destination = os.path.join(directory, bus_folder + match)
-                    print("trying to move")
                     shutil.move(source, destination)
                 count += 1
             else:
