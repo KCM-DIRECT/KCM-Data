@@ -74,17 +74,19 @@ def group_files(directory, keyword):
         else:
             module_list = []
             source = os.path.join(directory, filename)
-            print('Source file: ', source)
             with open(directory + filename) as file_1:
                 reader = csv.reader(file_1)
                 for row in reader:
                     for element in row:
                         if keyword in element:
                             mod_num = re.sub(r'\W+', '', element[17:]).lower()
-                            if mod_num != '':
-                                module_list.append(mod_num)
-                            else:
-                                pass
+                            module_list.append(mod_num)
+                        else:
+                            pass
+            if not module_list:
+                pass
+            else:
+                module_list.pop(0)
             if len(module_list) >= 16:
                 bus_folder = 'bus_' + str(count) + '/'
                 if not os.path.exists(os.path.join(directory, bus_folder)):
@@ -92,7 +94,6 @@ def group_files(directory, keyword):
                 else:
                     pass
                 destination = os.path.join(directory, bus_folder + filename)
-                module_list.pop(0)
                 moved_files.append(filename)
                 shutil.move(source, destination)
                 # Finish moving complete source file to new directory
@@ -101,7 +102,6 @@ def group_files(directory, keyword):
                     if otherfile in moved_files:
                         pass
                     else:
-                        print('Other file', otherfile)
                         other_modules = []
                         with open(directory + otherfile) as file_2:
                             reader = csv.reader(file_2)
@@ -109,19 +109,24 @@ def group_files(directory, keyword):
                                 for element in row:
                                     if keyword in element:
                                         mod_num = re.sub(r'\W+', '', element[17:]).lower()
-                                        if mod_num != '':
-                                            other_modules.append(mod_num)
-                                        else:
-                                            pass
+                                        other_modules.append(mod_num)
+                                    else:
+                                        pass
+                        if not other_modules:
+                            pass
+                        else:
+                            other_modules.pop(0)
+                        if(len(other_modules) >= 16):
                             if (any(module_num in module_list for module_num in other_modules)):
                                 list_matches.append(otherfile)
                                 moved_files.append(otherfile)
                             else:
                                 pass
+                        else:
+                            pass
                 for match in list_matches:  # Modified from before because generally not safe to modify list as we loop
                     source = directory + match
                     destination = os.path.join(directory, bus_folder + match)
-                    print("trying to move")
                     shutil.move(source, destination)
                 count += 1
             else:
@@ -131,170 +136,3 @@ def group_files(directory, keyword):
                     os.makedirs(os.path.join(incomplete))
                 destination = incomplete + filename
                 shutil.move(source, destination)
-
-
-# In[93]:
-
-
-directory = find_directory()
-group_files(directory, 'Mfg Data (ASCII)')
-
-
-# ## Testing Individual Files
-
-# In[26]:
-
-
-keyword = 'Mfg Data (ASCII)'
-directory = find_directory()
-test_csv = grab_csv(directory)
-file_1 = directory + '!3J0018_ProfileData_20170920082828.csv'
-file_2 = directory + '14H0220_ProfileData_20181218082248.csv'
-file_1_mods = []
-list_matches = []
-with open(file_1) as file:  # Iterating through all remaining files in list of files
-    reader = csv.reader(file)
-    for row in reader:
-        for element in row:
-            if keyword in element:
-                file_1_mods.append(element.lower())
-with open(file_2) as file:  # Iterating through all remaining files in list of files
-    reader = csv.reader(file)
-    for row in reader:
-        for element in row:
-            if keyword in element:
-                file_2_mods.append(element.lower())
-# any(module_num in file_1_mods for module_num in file_2_mods)
-# print('File 1: ' , file_1_mods, '\n File 2: ', file_2_mods)
-
-
-# In[44]:
-
-
-keyword = 'Mfg Data (ASCII)'
-directory = find_directory()
-test_csv = grab_csv(directory)
-file_1 = directory + '!3J0018_ProfileData_20170920082828.csv'
-# file_2 = directory + '13j0016_ProfileData_20190121101408.csv'
-file_1_mods = []
-list_matches = []
-with open(file_1) as file:  # Iterating through all remaining files in list of files
-    reader = csv.reader(file)
-    for row in reader:
-        for element in row:
-            if keyword in element:
-                file_1_mods.append(element[19:44].lower())
-    file_1_mods.pop(0)
-# with open(file_2) as file:  # Iterating through all remaining files in list of files
-#     reader = csv.reader(file)
-#     for row in reader:
-#         for element in row:
-#             if keyword in element:
-#                 file_2_mods.append(element.lower())
-# any(module_num in file_1_mods for module_num in file_2_mods)
-for filename in test_csv:
-    file_2_mods = []
-    with open(filename) as file:  # Iterating through all remaining files in list of files
-        reader = csv.reader(file)
-        for row in reader:
-            for element in row:
-                if keyword in element:
-                    file_2_mods.append(element[19:44].lower())
-    if(any(module_num in file_1_mods for module_num in file_2_mods)):
-        list_matches.append(filename)
-
-
-# In[45]:
-
-
-list_matches
-
-
-# In[46]:
-
-
-len(list_matches)
-
-
-# In[47]:
-
-
-type(os.path.join(directory, filename))
-
-
-# In[81]:
-
-
-mod = 'Mfg Data (ASCII): 364A1583G100      -13L0049............'
-mod[17:]
-
-
-# In[82]:
-
-
-re.sub(r'\W+', '', mod[17:]).lower()
-
-
-# In[101]:
-
-
-keyword = 'Mfg Data (ASCII)'
-directory = find_directory()
-test_csv = grab_csv(directory)
-file_1 = directory + 'bus_30/' + '14F0168_ProfileData_20180607122634.csv'
-file_2 = directory + 'bus_30/' + '13L0309_ProfileData_20180607062937.csv'
-file_1_mods = []
-file_2_mods = []
-list_matches = []
-with open(file_1) as file:  # Iterating through all remaining files in list of files
-    reader = csv.reader(file)
-    for row in reader:
-        for element in row:
-            if keyword in element:
-                mod_num = re.sub(r'\W+', '', element[17:]).lower()
-                file_1_mods.append(mod_num)
-with open(file_2) as file:  # Iterating through all remaining files in list of files
-    reader = csv.reader(file)
-    for row in reader:
-        for element in row:
-            if keyword in element:
-                mod_num = re.sub(r'\W+', '', element[17:]).lower()
-                file_2_mods.append(mod_num)
-# for i in range(len(file_1_mods)):
-#     print('\n', file_1_mods[i], file_2_mods[i], '\n')
-# print(len(file_1_mods), len(file_2_mods))
-# d = {'file1': file_1_mods, 'file2':file_2_mods}
-# df = pd.DataFrame(data=d)
-# df
-file_2_mods.pop(0)
-any(module_num in file_1_mods for module_num in file_2_mods)
-
-
-# In[102]:
-
-
-print(file_1_mods)
-
-
-# In[103]:
-
-
-print(file_2_mods)
-
-
-# In[106]:
-
-
-temp = set(file_1_mods)
-res = [i for i, val in enumerate(file_2_mods) if val in temp]
-print(str(res))
-# print(file_2_mods)
-
-
-# In[109]:
-
-
-for i in range(len(file_1_mods)):
-    if file_1_mods[i] in file_2_mods:
-        print(file_1_mods[i])
-
