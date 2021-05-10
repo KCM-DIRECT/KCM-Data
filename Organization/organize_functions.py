@@ -22,7 +22,8 @@ import csv
 
 # 1. Import file organize_functions.py
 # 2. Use organize_functions.find_directory() to get your directory as a string (store as directory variable)
-# 3. Use organize_functions.group_files(directory, 'Mfg Data (ASCII)') to group files.
+# 3. Use organize_functions.group_files(directory) to group files.
+    # a.) Changed keyword argument into a string within function since we will never change this.
 
 # ## Functions
 
@@ -59,11 +60,12 @@ def grab_csv(directory):
 # In[91]:
 
 
-def group_files(directory, keyword):
+def group_files(directory):
     '''
     Finds serial numbers for all modules of a each file in a directory and groups CSV files with matching serials into 
     individual bus directories.
     '''
+    keyword = 'Mfg Data (ASCII)'
     count = 1
     list_of_csv = grab_csv(directory)
     moved_files = []
