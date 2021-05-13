@@ -5,7 +5,6 @@ import datetime
 from datetime import datetime
 import pandas as pd
 import pathlib
-import csv
 
 def find_directory():
     '''
@@ -60,3 +59,32 @@ def sort_bus_by_date(directory, bus_num):
     files_dates.reset_index(drop = True, inplace=True)
     
     return files_dates
+    
+def build_bus_df(directory, bus_num, keyword):
+    bus_dates = sort_bus_by_date(directory, bus_num)
+    if keyword == 'Current':
+        row_list = list(range(19)) + list(range(20,960))
+        index_range = list(range(0,18)) + list(range(19,960))
+    elif keyword == 'Voltage':
+        row_list = list(range(23)) + list(range(24,960))
+        index_range = list(range(0,22)) + list(range(23,960))
+    elif keyword == 'Power':
+        row_list = list(range(27)) + list(range(28,960))
+        index_range = list(range(0,26)) + list(range(27,960))
+    else:
+        print("Keyword entered in error. Please select from 'Current', 'Voltage', or 'Power'.")
+        
+    bus_parameter = pd.DataFrame()
+    for i in range(len(bus_dates)):
+        file = bus_dates['Filename'].loc[i]
+        file_dir = directory + bus_num + file
+        tmp = pd.read_csv(file_dir, header=None, skiprows=row_list) 
+        bus_parameter = bus_parameter.append(tmp)
+    df_index = pd.read_csv(file_dir, header=0, skiprows = index_range)
+    bus_parameter.columns = df_index.columns
+
+    bus_parameter = bus_parameter.loc[:, ~bus_parameter.columns.str.contains('^Unnamed')]
+    bus_parameter.reset_index(drop = True, inplace=True)
+
+    return bus_parameter
+    
