@@ -2,28 +2,21 @@
 # coding: utf-8
 
 # In[52]:
-
-
-import matplotlib.pyplot as plt
-import numpy as np
-import os
-from os import listdir
-import pandas as pd 
-import shutil
-from shutil import copyfile
-get_ipython().run_line_magic('matplotlib', 'inline')
-import re
-
-import pathlib
 import csv
-
+import os
+import pathlib
+import re
+import shutil
+from os import listdir
 
 # ## Instructions For Use
 
 # 1. Import file organize_functions.py
-# 2. Use organize_functions.find_directory() to get your directory as a string (store as directory variable)
+# 2. Use organize_functions.find_directory() to
+#    get your directory as a string (store as directory variable)
 # 3. Use organize_functions.group_files(directory) to group files.
-    # a.) Changed keyword argument into a string within function since we will never change this.
+#    a.) Changed keyword argument into a string within function
+#        since we will never change this.
 
 # ## Functions
 
@@ -32,7 +25,8 @@ import csv
 
 def find_directory():
     '''
-    Assuming your python file is in the directory containing KCM data files, returns a path to that directory with an additional
+    Assuming your python file is in the directory containing KCM data files,
+    returns a path to that directory with an additional
     forward slash for future concatenation processes.
     '''
     path = pathlib.Path().absolute()
@@ -50,7 +44,7 @@ def grab_csv(directory):
     '''
     list_of_csv = []
     for filename in listdir(directory):
-        if (filename.endswith('.csv')): #or filename.endswith('.xlsx')):
+        if (filename.endswith('.csv')):  # or filename.endswith('.xlsx')):
             list_of_csv.append(filename)
         else:
             pass
@@ -62,7 +56,8 @@ def grab_csv(directory):
 
 def group_files(directory):
     '''
-    Finds serial numbers for all modules of a each file in a directory and groups CSV files with matching serials into 
+    Finds serial numbers for all modules of a each file in a directory and
+    groups CSV files with matching serials into
     individual bus directories.
     '''
     keyword = 'Mfg Data (ASCII)'
@@ -110,7 +105,9 @@ def group_files(directory):
                             for row in reader:
                                 for element in row:
                                     if keyword in element:
-                                        mod_num = re.sub(r'\W+', '', element[17:]).lower()
+                                        mod_num = re.sub(r'\W+',
+                                                         '',
+                                                         element[17:]).lower()
                                         other_modules.append(mod_num)
                                     else:
                                         pass
@@ -119,14 +116,15 @@ def group_files(directory):
                         else:
                             other_modules.pop(0)
                         if(len(other_modules) >= 16):
-                            if (any(module_num in module_list for module_num in other_modules)):
+                            if (any(module_num in module_list
+                                    for module_num in other_modules)):
                                 list_matches.append(otherfile)
                                 moved_files.append(otherfile)
                             else:
                                 pass
                         else:
                             pass
-                for match in list_matches:  # Modified from before because generally not safe to modify list as we loop
+                for match in list_matches:
                     source = directory + match
                     destination = os.path.join(directory, bus_folder + match)
                     shutil.move(source, destination)
