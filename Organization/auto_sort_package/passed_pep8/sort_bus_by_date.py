@@ -1,0 +1,94 @@
+import csv
+import datetime
+import os
+import pathlib
+import pandas as pd
+from datetime import datetime
+from os import listdir
+
+
+def find_directory():
+    '''
+    Assuming your python file is in the directory containing KCM data files,
+    returns a path to that directory with an additional
+    forward slash for future concatenation processes.
+    '''
+    path = pathlib.Path().absolute()
+    directory = str(path) + '/'
+    return directory
+
+
+def sort_bus_by_date(directory, bus_num):
+    ''' input bus_num as string with number of bus desired'''
+
+    # find directory of bus from sorted files
+    bus_directory = directory + bus_num
+
+    # make list of all files in bus folder
+    csv_list = []
+    for file in listdir(bus_directory):
+        if file.endswith('.csv'):
+            csv_list.append(file)
+
+    # make a list of dates and initialize final columns for dataframe
+    list_of_dates = []
+    substring = 'Data retrieved'
+    cols = ['Filename', 'DateRetrieved']
+
+    for filename in csv_list:
+        with open(bus_directory + filename) as file:
+            reader = csv.reader(file)
+            for row in reader:
+                try:
+                    for element in row:
+                        if substring in element:
+                            # print(filename, '|', element)
+                            list_of_dates.append(element)
+                except IndexError:
+                    pass  # some files have no data
+    # pull out the 'Date Retrieved' and @ symbol from the date column
+    for i in range(len(list_of_dates)):
+        date = list_of_dates[i]
+        list_of_dates[i] = date[16:].replace('@', '')
+
+    # make the dataframe of filenames and dates
+    list_of_tuples = list(zip(csv_list, list_of_dates))
+    files_dates = pd.DataFrame(list_of_tuples, columns=cols)
+
+    # sort by date
+    files_dates['DateRetrieved'] = pd.to_datetime(files_dates.DateRetrieved)
+    files_dates.sort_values('DateRetrieved', inplace=True)
+    files_dates.reset_index(drop=True, inplace=True)
+
+    return files_dates
+
+
+def build_bus_df(directory, bus_num, keyword):
+    bus_dates = sort_bus_by_date(directory, bus_num)
+    if keyword == 'Current':
+        row_list = list(range(19)) + list(range(20, 960))
+        index_range = list(range(0, 18)) + list(range(19, 960))
+    elif keyword == 'Voltage':
+        row_list = list(range(23)) + list(range(24, 960))
+        index_range = list(range(0, 22)) + list(range(23, 960))
+    elif keyword == 'Power':
+        row_list = list(range(27)) + list(range(28, 960))
+        index_range = list(range(0, 26)) + list(range(27, 960))
+    else:
+        print("Keyword entered in error."
+              "Please select from 'Current', 'Voltage', or 'Power'.")
+
+    bus_parameter = pd.DataFrame()
+    for i in range(len(bus_dates)):
+        file = bus_dates['Filename'].loc[i]
+        file_dir = directory + bus_num + file
+        tmp = pd.read_csv(file_dir, header=None, skiprows=row_list)
+        bus_parameter = bus_parameter.append(tmp)
+    df_index = pd.read_csv(file_dir, header=0, skiprows=index_range)
+    bus_parameter.columns = df_index.columns
+
+    loc = bus_parameter.loc[:, ~bus_parameter.columns.str.contains('^Unnamed')]
+    bus_parameter = loc
+    bus_parameter.reset_index(drop=True, inplace=True)
+
+    return bus_parameter
