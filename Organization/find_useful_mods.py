@@ -62,6 +62,7 @@ def find_replaced_modules(directory):
                             if base_serial == comp_serial:  # Compare base serial to comparison serial 
                                 count += 1
                                 latest_date = each_date
+#                                 print("Current date: ", each_date, "\nCurrent latest date: ", latest_date)
                                 if count == 1:
                                     first_date = each_date
                                     start_end_list.append(first_date)
@@ -69,11 +70,19 @@ def find_replaced_modules(directory):
                                     pass
                     start_end_list.append(latest_date)
                     serial_start_end[serial_tuple[1]] = start_end_list  # Uncleaned serial -> start and end dates
+                    
+#                 # Now compare start and end dates for each module to the first and last date of the ordered_csvs by date list
+
+#                 pprint.pprint(serial_start_end)  # For pretty printing dictionary
+#                 print("Length of the serial dictionary: ", len(serial_start_end), "\nLength of mod set: ", len(mod_set))
                 for serial_key in serial_start_end:
                     start_end = serial_start_end[serial_key]
+#                     print(start_end)
+# #                     print('Key : ', serial_key, "\nStart and End Dates: ", start_end, "\n")
+#                     print("Start Date: ", start_end[0], "\nFirst Date: ", ordered_dates[0], "\nEnd Date: ", start_end[-1],  "\nLast Date: ", ordered_dates[-1], "\n")
                     if start_end[0] != ordered_dates[0] and start_end[-1] != ordered_dates[-1]:
                         replaced_mods.add(serial_key)
-                bus_swapped_mods[bus] = replaced_mods
+                bus_swapped_mods[bus] = list(replaced_mods)
 #                 print(replaced_mods)
     return {k:v for k,v in bus_swapped_mods.items() if v}
 
@@ -87,7 +96,8 @@ def find_replaced_modules(directory):
 
 def swapped_mod_dataframes(directory, serial_num, characteristic):
     serial_index = 17
-    mod_num = re.sub(r'\W+', '', serial_num[serial_index:]).upper()  # Convert the serial number provided
+    mod_num = re.sub(r'\W+', '', serial_num).upper()  # Convert the serial number provided
+#     print(mod_num)
     keyword = 'Mfg Data'
     index_dictionary = {
         'cell voltages': [5, 7, 8, 20],
@@ -125,6 +135,7 @@ def swapped_mod_dataframes(directory, serial_num, characteristic):
                         if keyword in element:
                             mod_num_test = re.sub(r'\W+', '', element[serial_index:]).upper()
                             if mod_num_test == mod_num:
+#                                 print('Bus Number: ', bus, '\nDates: ', ordered_dates)
                                 indices_list = index_dictionary[characteristic.lower()]
                                 title = row_list[i + indices_list[0]][0] + '  ' + ordered_dates[csv_file]
                                 # Concatenate with Module Number (key to dictionary)
