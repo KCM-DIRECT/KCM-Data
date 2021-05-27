@@ -107,6 +107,11 @@ def swapped_mod_dataframes(directory, serial_num, characteristic):
 #         Numbers correspond to the number of rows from the module number row that needs to be skipped in order to reach
 #         the following: title_row, column_row, start_index of data values, end_index of values
     }
+    title_ind = 0
+    col_ind = 1
+    start = 2
+    end = 3
+    empty_space = -2
     key_list = index_dictionary.keys()
     list_bus_nums = []
     list_desired_dfs = []
@@ -137,20 +142,27 @@ def swapped_mod_dataframes(directory, serial_num, characteristic):
                             if mod_num_test == mod_num:
 #                                 print('Bus Number: ', bus, '\nDates: ', ordered_dates)
                                 indices_list = index_dictionary[characteristic.lower()]
-                                title = row_list[i + indices_list[0]][0] + '  ' + ordered_dates[csv_file]
+                                title = row_list[i + indices_list[title_ind]][0] + '  ' + ordered_dates[csv_file]
                                 # Concatenate with Module Number (key to dictionary)
-                                column_labels = row_list[i + indices_list[1]][1:]
+                                full_column_labels = row_list[i + indices_list[col_ind]][1:]
+                                column_labels = [element for element in full_column_labels if element]
                                 data_vals = []
                                 row_labels = []
-                                for j in range(indices_list[2], indices_list[3]):
-                                    data_vals.append(row_list[i + j][1:])
+                                for j in range(indices_list[start], indices_list[end]):
+#                                     print(row_list[i + j])
+                                    full_row = row_list[i + j][1:]
+                                    clean_row = [element for element in full_row if element]
+#                                     print(clean_row)
+                                    data_vals.append(clean_row)
                                     row_labels.append(row_list[i + j][0])
-                                df_voltage = pd.DataFrame(data=data_vals, columns=column_labels, index=row_labels)
+                                df_characteristic = pd.DataFrame(data=data_vals, columns=column_labels, index=row_labels)
 #                                     df_voltage.dropna(how='all', axis=1, inplace=True)
 #                                     df_voltage = df_voltage.drop('TOTAL', 1)
 #                                     df_voltage = df_voltage.rename(columns=str).rename(columns={'None':'TOTAL'})
 #                                     df_voltage = df_voltage.style.set_caption(title)
-                                index = df_voltage.index
+                                for label in column_labels:
+                                    df_characteristic[label] = df_characteristic[label].astype('int')
+                                index = df_characteristic.index
                                 index.name = title
-                                list_desired_dfs.append(df_voltage)
+                                list_desired_dfs.append(df_characteristic)
     return list_desired_dfs
