@@ -20,7 +20,7 @@ def sort_bus_by_date(directory, bus_num):
     ''' input bus_num as string with number of bus desired'''
     
     # find directory of bus from sorted files
-    bus_directory = directory + 'all_data/' + 'False_files/' + bus_num
+    bus_directory = directory + bus_num
     
     #make list of all files in bus folder
     csv_list = []
@@ -77,7 +77,7 @@ def build_bus_df(directory, bus_num, keyword):
     bus_parameter = pd.DataFrame()
     for i in range(len(bus_dates)):
         file = bus_dates['Filename'].loc[i]
-        file_dir = directory + 'all_data/' + 'False_files/' + bus_num + file
+        file_dir = directory + bus_num + file
         tmp = pd.read_csv(file_dir, header=None, skiprows=row_list) 
         bus_parameter = bus_parameter.append(tmp)
     df_index = pd.read_csv(file_dir, header=0, skiprows = index_range)
@@ -99,7 +99,7 @@ def build_module_df(directory, bus_num, module_num):
     module_df = pd.DataFrame()
     for i in range(len(bus_dates)):
         file = bus_dates['Filename'].loc[i]
-        file_dir = directory + 'all_data/' + 'False_files/' + bus_num + file
+        file_dir = directory + bus_num + file
         tmp = pd.read_csv(file_dir, header=None, skiprows=row_list) 
         module_df = module_df.append(tmp)
     df_index = pd.read_csv(file_dir, header=0, skiprows = index_range)
