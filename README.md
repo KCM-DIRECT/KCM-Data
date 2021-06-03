@@ -23,12 +23,12 @@
 
 ![Sequence Diagram](https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/diagram_workflow.jpg)
 
-## Gantt Chart:
+## Gantt Chart
 
 ![Gantt Chart](https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/diagram_ganttchart.jpg)
 
 
-## Repository Architecture:
+## Repository Architecture
 
 ```
 |   README.md
