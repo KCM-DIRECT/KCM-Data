@@ -25,7 +25,7 @@
 
 ## Gantt Chart:
 
-![Gantt Chart](https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/diagram_gantt\ chart.jpg)
+![Gantt Chart](https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/diagram_ganttchart.jpg)
 
 
 ## Repository Architecture:
