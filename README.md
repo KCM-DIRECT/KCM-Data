@@ -21,11 +21,11 @@
 
 ## Sequence Diagram
 
-![Sequence Diagram](https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/sequence_diagram.jpg)
+![Sequence Diagram](https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/diagram_workflow.jpg)
 
 ## Gantt Chart:
 
-![Gantt Chart](https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/gantt_chart.jpg)
+![Gantt Chart](https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/diagram_gantt chart.jpg)
 
 
 ## Repository Architecture:
@@ -36,14 +36,12 @@
 |   .gitignore
 +---doc
 |   |   Use_Cases.md
-|   |   Hybrid_Bus_Batteries.pdf
-|   |   gantt_chart.jpg
+|   |   diagram_battery layout.pdf
+|   |   diagram_gantt chart.jpg
+|   |   diagram_workflow.jpg
 |   |   kcm-diagnostics-final.pdf
-|   |   sequence_diagram.jpg
 +---Raw Data 
-|   |   old profiles 2015-2017-05-26
-|   |   old profiles 2015-2017-aug-13th
-|   |   profiles 2017-2019
+|   |   KCM-Raw-Data.zip
 +---Sorting buses
 |   |   Florence scrap work.ipynb
 |   |   KCM_BMS.ipynb
