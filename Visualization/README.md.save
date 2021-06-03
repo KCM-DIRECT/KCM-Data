@@ -1,0 +1,5 @@
+Instructions for extracting data from sorted buses with module changes:
+
+1. Run heat map .py file to make a dataframe that counts the number of times each module on each bus was changed
+2. Create heat map using ...
+	a. HERE some more csv's were manually moved if heat map appeared abnormal (example: changed every time, one file nothttp://127.0.0.1:8888/?token=801670dc8d11eb518749adc8
