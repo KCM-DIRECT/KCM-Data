@@ -1,4 +1,4 @@
-# KCM-Data <img align="center" src=https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/logo.jpg width="100" height="100">
+# KCM-Data <img align="center" src=https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/logo.jpg width="142" height="100">
 
 ## Use Cases
 
