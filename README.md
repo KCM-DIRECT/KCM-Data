@@ -1,4 +1,4 @@
-# KCM-Data <img align="center" src=https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/logo.jpg width="142" height="100">
+# Magic Metro Bus <img align="center" src=https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/logo.jpg width="142" height="100">
 
 ## Use Cases
 
@@ -34,6 +34,8 @@
 |   README.md
 |   LICENSE
 |   .gitignore
+|   auto_sort_data.py
+|   test_autosort.ipynb
 +---doc
 |   |   Use_Cases.md
 |   |   diagram_battery layout.pdf
