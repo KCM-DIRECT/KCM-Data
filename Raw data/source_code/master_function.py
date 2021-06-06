@@ -50,6 +50,7 @@ def fliter_false_module():
 def move_false_bus():
     False_list = fliter_false_module()
     source = os.getcwd()
+    print(source)
     destination = source + '/False_files'
     if not os.path.exists(destination):
             os.makedirs(destination)
