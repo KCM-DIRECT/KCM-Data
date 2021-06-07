@@ -144,6 +144,32 @@ def build_module_average_df(directory, bus_num, module_num):
 
     return module_average_df_final
     
+
+def visualize_mod_time(directory, bus_num, module_num):
+    df = build_module_average_df(directory, bus_num, module_num)
+    df = df.reset_index()
+    data = df.melt('DateRetrieved', var_name='voltage', value_name='counts')
+    dates = list(data['DateRetrieved'].unique())
+    
+    
+    brush = alt.selection_interval(bind='scales') 
+    input_dropdown = alt.binding_select(options=dates)
+    selection = alt.selection_single(fields=['DateRetrieved'], bind=input_dropdown, name=' ')
+    color = alt.condition(selection,
+                        alt.Color('DateRetrieved:N'),
+                        alt.value('lightgray'))
+    
+    line = alt.Chart(data.reset_index()).mark_line().encode(
+    x='voltage:Q',
+    y='counts:Q',
+    color=color,
+    tooltip='Name:N'
+    ).add_selection(
+    brush, selection
+    )
+    
+    return line
+    
     
 def count_mod_changes(directory):
     '''
