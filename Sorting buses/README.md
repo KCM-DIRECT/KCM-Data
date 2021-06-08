@@ -1,4 +1,4 @@
-## Instructions for sorting raw bus folders:
+## Instructions for sorting raw data into bus folders:
 
 Ensure you have the correct directory architecture, using the repository architecture as reference. Your current directory should contain the auto_sort_data.py file as well as a folder titled 'Raw Data' that contains a zip file of the data to be sorted. The zip file should be titled "KCM-Raw-Data.zip".
 
