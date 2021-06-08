@@ -2,7 +2,7 @@ import csv
 from os import listdir
 import pandas as pd
 import re
-import sort_bus_by_date
+from .sort_bus_by_date import sort_bus_by_date
 
 
 def count_mod_changes(directory):
@@ -40,7 +40,7 @@ def count_mod_changes(directory):
             list_bus_nums.append(file)  # Getting list of bus names
     for bus in list_bus_nums:  # For each bus
         ordered_dates = []
-        df = sort_bus_by_date.sort_bus_by_date(directory, bus + '/')
+        df = sort_bus_by_date(directory, bus + '/')
         ordered_csv = df['Filename'].tolist()
         ordered_unclean_dates = df['DateRetrieved'].tolist()
         for unclean_date in ordered_unclean_dates:

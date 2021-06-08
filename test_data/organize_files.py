@@ -4,7 +4,6 @@ from os import listdir
 import pathlib
 import re
 import shutil
-import zipfile
 
 
 def find_directory():

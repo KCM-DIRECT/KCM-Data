@@ -2,7 +2,7 @@ import csv
 from os import listdir
 import pandas as pd
 import re
-import sort_bus_by_date
+from .sort_bus_by_date import sort_bus_by_date
 
 def find_replaced_modules(directory):
     serial_index = 17
@@ -24,7 +24,7 @@ def find_replaced_modules(directory):
             # case of letter (i.e. to avoid A1 != a1)
             for file in listdir(directory + bus_slash):
                 # For each bus folder
-                df = sort_bus_by_date.sort_bus_by_date(directory, bus_slash)
+                df = sort_bus_by_date(directory, bus_slash)
                 # Sarah's dataframe for organized files
                 ordered_dates = []
                 # List of ordered dates per bus folder
@@ -147,7 +147,7 @@ def swapped_mod_dataframes(directory, serial_num, characteristic):
             # Getting list of bus names
     for bus in list_bus_nums:  # For each bus
         ordered_dates = []
-        df = sort_bus_by_date.sort_bus_by_date(directory, bus + '/')
+        df = sort_bus_by_date(directory, bus + '/')
         ordered_csv = df['Filename'].tolist()
         ordered_unclean_dates = df['DateRetrieved'].tolist()
         for unclean_date in ordered_unclean_dates:

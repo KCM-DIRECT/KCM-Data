@@ -1,12 +1,12 @@
 import pandas as pd
 from os import listdir
-import sort_bus_by_date
+from .sort_bus_by_date import sort_bus_by_date
 
 def build_bus_df(directory, bus_num, keyword):
     '''
     Builds dataframes of the information at the top of CSVs representing data on overall bus battery performance.
     '''
-    bus_dates = sort_bus_by_date.sort_bus_by_date(directory, bus_num)
+    bus_dates = sort_bus_by_date(directory, bus_num)
     if keyword == 'Current':
         row_list = list(range(19)) + list(range(20, 960))
         index_range = list(range(0, 18)) + list(range(19, 960))

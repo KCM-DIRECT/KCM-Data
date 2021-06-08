@@ -1,10 +1,9 @@
 import os
 from os import listdir
-# from organize_files import find_directory
-# from organize_files import grab_csv
-# from organize_files import group_files
+from organize_files import find_directory
+from organize_files import grab_csv
+from organize_files import group_files
 # import organize_files
-import find_directory
 
 def test_find_directory_1():
     '''
