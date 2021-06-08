@@ -1,12 +1,12 @@
 import pandas as pd
 from os import listdir
-from .sort_bus_by_date import sort_bus_by_date
+import sort_bus_by_date
 
 def build_bus_df(directory, bus_num, keyword):
     '''
     Builds dataframes of the information at the top of CSVs representing data on overall bus battery performance.
     '''
-    bus_dates = sort_bus_by_date(directory, bus_num)
+    bus_dates = sort_bus_by_date.sort_bus_by_date(directory, bus_num)
     if keyword == 'Current':
         row_list = list(range(19)) + list(range(20, 960))
         index_range = list(range(0, 18)) + list(range(19, 960))
@@ -37,7 +37,7 @@ def build_module_df(directory, bus_num, module_num):
     '''
     Builds dataframes of the information for a module (1 through 16).
     '''
-    bus_dates = sort_bus_by_date(directory, bus_num)
+    bus_dates = sort_bus_by_date.sort_bus_by_date(directory, bus_num)
     start_row = 51 + (11+47) * (module_num - 1)
     end_row = start_row + 12
     row_list = list(range(start_row)) + list(range(end_row, 960))
@@ -59,7 +59,7 @@ def build_module_average_df(directory, bus_num, module_num):
     '''
     Builds dataframes of the averaged data for a module (1 through 16).
     '''
-    bus_dates = sort_bus_by_date(directory, bus_num)
+    bus_dates = sort_bus_by_date.sort_bus_by_date(directory, bus_num)
     start_row = 51 + (11+47) * (module_num-1)
     end_row = start_row + 12
     row_list = list(range(start_row)) + list(range(end_row, 960))

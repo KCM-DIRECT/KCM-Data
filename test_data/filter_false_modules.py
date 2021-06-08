@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import re
 import shutil
-from .sort_bus_by_date import sort_bus_by_date
+import sort_bus_by_date
 
 def compare_file_mods(directory):
     '''
@@ -24,7 +24,7 @@ def compare_file_mods(directory):
         if file.startswith('bus'):
             list_bus_nums.append(file)
     for bus in list_bus_nums:
-        df = sort_bus_by_date(directory, bus + '/')
+        df = sort_bus_by_date.sort_bus_by_date(directory, bus + '/')
         ordered_csv = df['Filename'].tolist()
         bus_to_ordered_csvs[bus] = ordered_csv
     for bus_key in bus_to_ordered_csvs:

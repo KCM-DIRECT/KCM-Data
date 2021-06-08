@@ -38,7 +38,6 @@ before_script:
 # the actual commands to run
 script:
     - coverage run -m unittest discover
-    - cd KCM-Data && python -m pytest --cov-report term --cov=. test_data/tests/
 
 # generate a coverage report to send to back to user
 after_success:
