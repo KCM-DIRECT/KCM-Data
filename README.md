@@ -35,7 +35,10 @@
 |   LICENSE
 |   .gitignore
 |   auto_sort_data.py
-|   test_autosort.ipynb
+|   build_data_vis.py
+|   Example_notebook.ipynb
+|   environment.yml
+|   .travis.yml
 +---doc
 |   |   Use_Cases.md
 |   |   diagram_battery layout.pdf
@@ -44,11 +47,14 @@
 |   |   kcm-diagnostics-final.pdf
 +---Raw Data 
 |   |   KCM-Raw-Data.zip
-+---Sorting buses
-|   |   Florence scrap work.ipynb
-|   |   KCM_BMS.ipynb
-+---Visualization
-|   |
++---sorted_data
+|   |   README.md
+    +---incomplete
+    +---bus_.../
++---vis_buses
+|   |   README.md
+    +---Cleaned_buses
+        +---bus_.../
 ```
 
 
