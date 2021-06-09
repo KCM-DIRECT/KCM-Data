@@ -1,3 +1,5 @@
+[![Build Status](https://www.travis-ci.com/KCM-DIRECT/KCM-Data.svg?branch=main)](https://www.travis-ci.com/KCM-DIRECT/KCM-Data)
+
 # Magic Metro Bus <img align="center" src=https://github.com/KCM-DIRECT/KCM-Data/blob/main/doc/logo.jpg width="142" height="100">
 
 ## Use Cases
