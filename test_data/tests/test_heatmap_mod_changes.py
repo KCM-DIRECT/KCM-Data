@@ -1,7 +1,7 @@
 import heatmap_mod_changes
 import pandas as pd
 
-directory = 'test_data/test_data_after_sorted/'
+directory = 'test_data_after_sorted/'
 
 def test_count_mod_changes_1():
     '''

@@ -2,7 +2,7 @@ from build_specific_dfs import find_replaced_modules
 from build_specific_dfs import swapped_mod_dataframes
 import pandas as pd
 
-directory = 'test_data/test_data_after_sorted/'
+directory = 'test_data_after_sorted/'
 
 def test_find_replaced_modules_1():
     '''

@@ -1,5 +1,6 @@
 import os
 from os import listdir
+import shutil
 # from organize_files import find_directory
 # from organize_files import grab_csv
 # from organize_files import group_files
@@ -17,7 +18,7 @@ def test_grab_csv_1():
     '''
     Tests that the return is a list.
     '''
-    directory = 'test_data/test_data_raw/'
+    directory = 'test_data_raw/'
     list_of_csv = organize_files.grab_csv(directory)
     assert isinstance(list_of_csv, list), 'Returned CSV file names is not in list format.'
     return
@@ -26,7 +27,7 @@ def test_grab_csv_2():
     '''
     Tests that the returned list only contains strings.
     '''
-    directory = 'test_data/test_data_raw/'
+    directory = 'test_data_raw/'
     list_of_csv = organize_files.grab_csv(directory)
     for file_name in list_of_csv:
         assert isinstance(file_name, str), 'The returned list of file names contains elements that are not strings'
@@ -36,7 +37,7 @@ def test_grab_csv_3():
     '''
     Tests that the returned strings all end with '.csv'.
     '''
-    directory = 'test_data/test_data_raw/'
+    directory = 'test_data_raw/'
     list_of_csv = organize_files.grab_csv(directory)
     for file_name in list_of_csv:
         assert file_name.endswith('.csv'), 'The returned list of file names contains elements that are not CSV files.'
@@ -48,7 +49,7 @@ def test_group_files_1():
     '''
     target_folders = ['bus_1', 'bus_2', 'incomplete']
     grouped_folders = []
-    directory = 'test_data/test_data_raw/'
+    directory = 'test_data_after_sorted/'
     organize_files.group_files(directory)
     for filename in listdir(directory):
         grouped_folders.append(filename)
@@ -60,14 +61,7 @@ def test_group_files_2():
     '''
     Tests that the function has grouped the test files into bus_1, bus_2, and incomplete folders.
     '''
-    directory = 'test_data/test_data_raw/'
-    for folder in listdir(directory):
-        for file in listdir(directory + folder + '/'):
-            source = os.path.join(directory, folder, file)
-            destination = os.path.join(directory, file)
-            os.shutil.move(source, destination)
-        folder_path = os.path.join(directory, folder)
-        os.remove(folder_path)
+    directory = 'test_data_raw/'
     target_folders = [directory + 'bus_1', directory + 'bus_2', directory + 'incomplete']
     organize_files.group_files(directory)
     for folder in target_folders:
@@ -79,14 +73,7 @@ def test_group_files_3():
     '''
     Tests that the organized folders contain csv files only.
     '''
-    directory = 'test_data/test_data_raw/'
-    for folder in listdir(directory):
-        for file in listdir(directory + folder + '/'):
-            source = os.path.join(directory, folder, file)
-            destination = os.path.join(directory, file)
-            os.shutil.move(source, destination)
-        folder_path = os.path.join(directory, folder)
-        os.remove(folder_path)    
+    directory = 'test_data_raw/'   
     target_folders = [directory + 'bus_1', directory + 'bus_2', directory + 'incomplete']
     organize_files.group_files(directory)
     for folder in target_folders:

@@ -3,7 +3,7 @@ import pandas as pd
 import sort_bus_by_date
 
 # test_data = 'test_data/'
-directory = 'test_data/test_data_after_sorted/'
+directory = 'test_data_after_sorted/'
 # directory = 'test_data/'
 
 def test_sort_by_bus_1():
