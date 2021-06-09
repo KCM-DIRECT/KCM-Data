@@ -1,5 +1,5 @@
-from build_specific_dfs import find_replaced_modules
-from build_specific_dfs import swapped_mod_dataframes
+from ..build_specific_dfs import find_replaced_modules
+from ..build_specific_dfs import swapped_mod_dataframes
 import pandas as pd
 
 directory = 'test_data_after_sorted/'

@@ -1,4 +1,5 @@
-import filter_false_modules
+from ..filter_false_modules import count_bus_file
+from ..filter_false_modules import filter_false_module
 import numpy as np
 import os
 from os import listdir
@@ -9,7 +10,7 @@ def test_count_bus_file_1():
     '''
     Test to determine that returned bus folders of test data is 2.
     '''
-    bus_count = filter_false_modules.count_bus_file(directory)
+    bus_count = count_bus_file(directory)
     assert bus_count == 2, "Number of buses in folder should be 2"
     return
 
@@ -17,7 +18,7 @@ def test_filter_false_module_1():
     '''
     Test the function should return an array type
     '''
-    return_type = filter_false_modules.filter_false_module(directory)
+    return_type = filter_false_module(directory)
     assert isinstance(return_type,np.ndarray),'The return type is not an array'
     return
 
@@ -25,7 +26,7 @@ def test_filter_false_module_2():
     '''
     Test the function should return a list type and each element should be string
     '''
-    return_list = filter_false_modules.filter_false_module(directory)
+    return_list = filter_false_module(directory)
     for element in return_list:
         assert isinstance(element,str),'Each element in this list should be string.'
     return
