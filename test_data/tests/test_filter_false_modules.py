@@ -1,6 +1,8 @@
 from ..filter_false_modules import count_bus_file
 from ..filter_false_modules import filter_false_module
+from ..filter_false_modules import compare_file_mods
 import numpy as np
+import pandas as pd
 import os
 from os import listdir
 
@@ -53,4 +55,38 @@ def test_move_false_bus_2():
         each_bus = listdir(directory_path)
         for element in each_bus:
             assert element.endswith('.csv'), 'There is a non csv file.'
+    return
+
+
+def test_compare_file_mods_1():
+    '''
+    Tests that function returns a dictionary
+    '''
+    return_type = compare_file_mods(directory)
+    assert isinstance(return_type,dict), 'The returned type is not a dictionary'
+    return
+
+
+def test_compare_file_mods_2():
+    '''
+    Tests that dictionary returns a pandas dataframe when type in attribute name, such as "bus_1"
+    '''
+    test_folder = ['bus_1','bus_2']
+    dic = compare_file_mods(directory)
+    for folder_name in test_folder:
+        dic_key = dic[folder_name]
+        assert isinstance(dic_key,pd.DataFrame), 'The returned type is not a pandas dataframe'
+    return
+
+
+def test_compare_file_mods_3():
+    '''
+    Tests that returned dataframe has 16 index, from "Module 1" to "Module 16"
+    '''
+    test_folder = ['bus_1', 'bus_2']
+    dic = compare_file_mods(directory)
+    for folder_name in test_folder:
+        dic_key = dic[folder_name]
+        index_len = dic_key.index
+        assert len(index_len) == 16, 'The dataframe is not in complete form, module number is not 16'
     return
