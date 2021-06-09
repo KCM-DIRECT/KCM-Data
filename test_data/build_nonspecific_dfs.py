@@ -1,6 +1,6 @@
 import pandas as pd
 from os import listdir
-import sort_bus_by_date
+from .sort_bus_by_date import sort_bus_by_date
 
 def build_bus_df(directory, bus_num, keyword):
     '''

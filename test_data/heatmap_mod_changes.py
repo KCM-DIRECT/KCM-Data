@@ -2,7 +2,7 @@ import csv
 from os import listdir
 import pandas as pd
 import re
-import sort_bus_by_date
+from .sort_bus_by_date import sort_bus_by_date
 
 
 def count_mod_changes(directory):
