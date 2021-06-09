@@ -34,6 +34,7 @@ install:
 before_script:
     - flake8 auto_sort_data.py
     - flake8 build_data_vis.py
+    - pip install -U pip
     - export PYTHONPATH=$PYTHONPATH:$(pwd)
     
 # the actual commands to run
