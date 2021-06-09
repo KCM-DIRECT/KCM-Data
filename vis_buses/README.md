@@ -1,10 +1,10 @@
-## Instructions for extracting and plotting graphs from sorted buses with module changes:
+# Instructions for extracting and plotting graphs from sorted buses with module changes:
 
 The build_data_vis package contains two main types of functions:
 1. _Dataframe building functions:_ These functions parse the csv files dataframes of specific parameters targeted by the user. For example, the user can extract a dataframe of just the module 1 voltages for the same bus over time.
 2. _Visualization functions_: These functions will use the dataframe building functions to extract portions of the csv files to be plotted to help the user notice any trends in the data.
 
-# List of Dataframe building functions:
+## List of Dataframe building functions:
 
 1. sort_bus_by_date: This function takes as input a directory and a string of the bus directory to be sorted. The function returns a dataframe with the file names within the bus folder sorted sequentially by date retrieved. The date retrieved is also a column in the dataframe.
 2. build_bus_df: This function takes as input a directory, a string of the desired bus directory, and a keyword (selected from 'Current', 'Voltage', or 'Power'. The function returns a dataframe of the __entire bus__ current, voltage, or power over time, with the order of the rows being sequential by date. The columns of the dataframe correspond to the selected keyword, and the values in the rows are in seconds. For example, in a voltage dataframe the columns will be a range of voltages from 2 to 4 V, and the corresponding rows will be the number of seconds the battery spent at that total voltage. 
@@ -14,10 +14,10 @@ The build_data_vis package contains two main types of functions:
 6. find_replaced_modules: This function takes as an input a directory of data sorted by bus. The function will return a dictionary with the bus number as the key and the serial number of the modules that have been swapped as the values.
 7. swapped_mod_dataframes: This function takes as an input a directory, a module serial number, and a keyword. The function then returns a dataframe of the input module characteristic. For example, inputting your directory with the serial number for bus 1 module 1 and the keyword 'balancers' will return a dataframe of the cell balancer data for that module, with the rows sequential by time.
 
-# List of Visualization functions:
+## List of Visualization functions:
 1. visualize_mod_time: This function uses the build_module_average_df output to visualize the distribution of time spent at each voltage in the voltage range for a given module. For example, running this function with the input of bus 1 and module 1 will return a graph with 12 plotted lines, one for each individual date in bus one, where the x axis is voltage and the y axis is time in seconds. A dropdown menu is available on the graph to select a specific date. The selected date will remain in color while the other dates will be rendered gray. The axes are also scalable by clicking and dragging and using your mouse scroll.
 2. visualize_mod_changes: This function uses the count_mod_changes output to produce a heat map for all buses indicating when the modules have been changed (with a color change indicating the module has been changed). The heat map includes a drop down menu to select the desired bus.
 
-# Instructions on using the package:
+## Instructions on using the package:
 
 Using the above descriptions, select which function produces the desired output. Import build_data_vis into your notebook and call the function by running build_data_vis.[desired_function].
