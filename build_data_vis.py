@@ -1,10 +1,10 @@
 import altair as alt
 import csv
+import matplotlib.pyplot as plt
 import pandas as pd
 import pathlib
 import re
 from os import listdir
-
 
 def find_directory():
     '''
@@ -328,6 +328,17 @@ def visualise_mod_changes(directory):
     ).add_selection(select_bus).transform_filter(select_bus)
 
     return chart
+    
+    
+def mod_change_statistics(directory):
+    df1 = count_mod_changes(directory)
+    grouped_times_changed = df1.groupby(['Bus', 'Module'], sort=None)['Change'].max()
+    average_times_changed = grouped_times_changed.groupby(['Module'], sort=None).mean()
+    chart = average_times_changed.plot(kind='bar', figsize=(6,4), fontsize=14, colormap='viridis')
+    plt.xlabel('Module', fontsize=16)
+    plt.ylabel('Average times changed', fontsize=16)
+    
+    return chart
 
 
 def find_replaced_modules(directory):
@@ -350,7 +361,7 @@ def find_replaced_modules(directory):
             # case of letter (i.e. to avoid A1 != a1)
             for file in listdir(directory + bus_slash):
                 # For each bus folder
-                df = sort_bus_by_date.sort_bus_by_date(directory, bus_slash)
+                df = sort_bus_by_date(directory, bus_slash)
                 # Sarah's dataframe for organized files
                 ordered_dates = []
                 # List of ordered dates per bus folder
@@ -472,7 +483,7 @@ def swapped_mod_dataframes(directory, serial_num, characteristic):
             # Getting list of bus names
     for bus in list_bus_nums:  # For each bus
         ordered_dates = []
-        df = sort_bus_by_date.sort_bus_by_date(directory, bus + '/')
+        df = sort_bus_by_date(directory, bus + '/')
         ordered_csv = df['Filename'].tolist()
         ordered_unclean_dates = df['DateRetrieved'].tolist()
         for unclean_date in ordered_unclean_dates:
