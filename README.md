@@ -36,9 +36,7 @@
 |   README.md
 |   LICENSE
 |   .gitignore
-|   auto_sort_data.py
-|   build_data_vis.py
-|   Example_notebook.ipynb
+|   __init__.py
 |   environment.yml
 |   .travis.yml
 +---test_data
@@ -58,7 +56,11 @@
 |   |   diagram_gantt chart.jpg
 |   |   diagram_workflow.jpg
 |   |   kcm-diagnostics-final.pdf
-+---Raw Data 
++---py_packages
+|   |   auto_sort_data.py
+|   |   build_data_vis.py
+|   |   Example_notebook.ipynb
++---raw_data 
 |   |   KCM-Raw-Data.zip
 +---sorted_data
 |   |   README.md

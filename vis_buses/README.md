@@ -16,6 +16,8 @@ The build_data_vis package contains two main types of functions:
 
 ## List of Visualization functions:
 1. visualize_mod_changes: This function uses the count_mod_changes output to produce a heat map for all buses indicating when the modules have been changed (with a color change indicating the module has been changed). The heat map includes a drop down menu to select the desired bus.
+	**here, you can manually go through the buses and see if there are any abnormalities (eg. too many module changes, all modules changed at once etc.)
+	**here, you can also manually pick out the buses that contain modules with beginning and end of life date
 2. mod_change_statistics: This function uses the count_mod_changes output to calculate and graph statistics on how often a given module is changed across all of the bus data. This allows us to see if module position has an effect on frequency of module failure.
 3.  visualize_mod_time: This function uses the build_module_average_df output to visualize the distribution of time spent at each voltage in the voltage range for a given module. For example, running this function with the input of bus 1 and module 1 will return a graph with 12 plotted lines, one for each individual date in bus one, where the x axis is voltage and the y axis is time in seconds. A dropdown menu is available on the graph to select a specific date. The selected date will remain in color while the other dates will be rendered gray. The axes are also scalable by clicking and dragging and using your mouse scroll.
 
