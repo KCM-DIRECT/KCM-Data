@@ -33,23 +33,12 @@
 ## Repository Architecture
 
 ```
-|   README.md
-|   LICENSE
 |   .gitignore
+|   .travis.yml
+|   LICENSE
+|   README.md
 |   __init__.py
 |   environment.yml
-|   .travis.yml
-+---test_data
-|   |   __init__.py
-|   |   build_nonspecific_dfs.py
-|   |   build_specific_dfs.py
-|   |   filter_false_modules.py
-|   |   heatmap_mod_changes.py
-|   |   organize_files.py
-|   |   sort_bus_by_date.py
-|   +---tests
-|   +---test_data_raw
-|   +---test_data_after_sorted
 +---doc
 |   |   Use_Cases.md
 |   |   diagram_battery layout.pdf
@@ -66,6 +55,17 @@
 |   |   README.md
     +---incomplete
     +---bus_.../
++---test_data
+|   |   __init__.py
+|   |   build_nonspecific_dfs.py
+|   |   build_specific_dfs.py
+|   |   filter_false_modules.py
+|   |   heatmap_mod_changes.py
+|   |   organize_files.py
+|   |   sort_bus_by_date.py
+|   +---tests
+|   +---test_data_raw
+|   +---test_data_after_sorted
 +---vis_buses
 |   |   README.md
     +---bus_.../
